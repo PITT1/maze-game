@@ -23,6 +23,7 @@ const level1 = () => {
     printWallY(20, 35, 15);
     printWallY(5, 10, 15);
 }
+
 const checkWallOut = () => {
     if (playerX < 1) {
         playerX = 1;
@@ -40,6 +41,14 @@ const checkWallOut = () => {
         playerY = 60;
     }
 }
+
+const playerUpdate = () => {
+    var playerElements = wrapper.getElementsByClassName('player');
+    if (playerElements[0]) {
+        wrapper.removeChild(playerElements[0]);
+    }
+}
+
 const movePlayerKeydown = (e) => {
     if (e.key == 'ArrowUp') {
         moveY = -1;
@@ -82,6 +91,7 @@ const printWallX = (begin, end, Y) => {
 level1();
 
 const initGame = () => {
+    playerUpdate();
     playerX += moveX;
     playerY += moveY;
     checkWallOut();
