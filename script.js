@@ -22,6 +22,19 @@ const level1 = () => {
     printWallY(15, 35, 5);
     printWallY(20, 35, 15);
     printWallY(5, 10, 15);
+    printWallX(20, 30, 25);
+    printWallX(15, 25, 30);
+    printWallX(20, 30, 35);
+    printWallX(1, 20, 45);
+    printWallY(40, 50, 25);
+    printWallX(10, 26, 50);
+    printWallY(50, 61, 5);
+    printWallX(5, 15, 55);
+    printWallY(50, 56, 20);
+    printWallX(20, 30, 55);
+    printWallY(45, 56, 30);
+    printWallX(30, 35, 45);
+    printWallY(50, 61, 35);
 }
 
 const checkWallOut = () => {
@@ -101,5 +114,5 @@ const initGame = () => {
 
 
 window.addEventListener('keydown', movePlayerKeydown);
-window.addEventListener('keyup', movePlayerKeyup);
+// window.addEventListener('keyup', movePlayerKeyup);
 setInterval(initGame, 60);
