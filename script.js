@@ -48,7 +48,7 @@ const level1 = () => {
     printWallX(40, 56, 15);
     printWallY(15, 25, 55);
     printWallX(45, 61, 10);
-    printWallX(40, 55, 5)
+    printWallX(40, 55, 5);
 }
 
 const checkWallOut = () => {
@@ -67,6 +67,33 @@ const checkWallOut = () => {
     if (playerY > 60) {
         playerY = 60;
     }
+}
+
+const checkWallcrash = () => {
+    let walls = document.querySelectorAll('.wall');
+    walls.forEach(wall => {
+        let playerDom = document.querySelector('.player');
+        let playerRect = playerDom.getBoundingClientRect();
+        let wallRect = wall.getBoundingClientRect();
+        if(wallRect.x == playerRect.x && wallRect.y == playerRect.y) {
+            if (moveY == -1 && moveX == 0) {
+                playerY += 1;
+                moveY = 0;
+            }
+            if (moveY == 1 && moveX == 0) {
+                playerY -= 1;
+                moveY = 0;
+            }
+            if (moveY == 0 && moveX == -1) {
+                playerX += 1;
+                moveX = 0;
+            }
+            if (moveY == 0 && moveX == 1) {
+                playerX -= 1;
+                moveX = 0;
+            }
+        }
+    })
 }
 
 const playerUpdate = () => {
@@ -123,10 +150,11 @@ const initGame = () => {
     playerY += moveY;
     checkWallOut();
     wrapper.innerHTML += `<div class="player" style="grid-area: ${playerY}/${playerX};"></div>`;
+    checkWallcrash();
 }
 
 
 
 window.addEventListener('keydown', movePlayerKeydown);
 // window.addEventListener('keyup', movePlayerKeyup);
-setInterval(initGame, 60);
+setInterval(initGame, 100);
