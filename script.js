@@ -35,6 +35,15 @@ const level1 = () => {
     printWallY(45, 56, 30);
     printWallX(30, 35, 45);
     printWallY(50, 61, 35);
+    printWallX(40, 55, 55);
+    printWallY(35, 50, 55);
+    printWallX(45, 56, 50);
+    printWallY(40, 50, 45);
+    printWallX(40, 50, 35);
+    printWallY(35, 45, 50);
+    printWallX(55, 61, 35);
+    printWallX(45, 55, 30);
+    printWallY(20, 30, 50);
 }
 
 const checkWallOut = () => {
