@@ -50,6 +50,23 @@ const level1 = () => {
     printWallY(15, 25, 55);
     printWallX(45, 61, 10);
     printWallX(40, 55, 5);
+
+    wrapper.innerHTML += '<div class="end" style="grid-area: 19/42;"></div>'
+    wrapper.innerHTML += '<div class="end" style="grid-area: 19/43;"></div>'
+    wrapper.innerHTML += '<div class="end" style="grid-area: 19/44;"></div>'
+    wrapper.innerHTML += '<div class="end" style="grid-area: 19/41;"></div>'
+    wrapper.innerHTML += '<div class="end" style="grid-area: 18/41;"></div>'
+    wrapper.innerHTML += '<div class="end" style="grid-area: 18/42;"></div>'
+    wrapper.innerHTML += '<div class="end" style="grid-area: 18/43;"></div>'
+    wrapper.innerHTML += '<div class="end" style="grid-area: 18/44;"></div>'
+    wrapper.innerHTML += '<div class="end" style="grid-area: 17/41;"></div>'
+    wrapper.innerHTML += '<div class="end" style="grid-area: 17/42;"></div>'
+    wrapper.innerHTML += '<div class="end" style="grid-area: 17/43;"></div>'
+    wrapper.innerHTML += '<div class="end" style="grid-area: 17/44;"></div>'
+    wrapper.innerHTML += '<div class="end" style="grid-area: 16/41;"></div>'
+    wrapper.innerHTML += '<div class="end" style="grid-area: 16/42;"></div>'
+    wrapper.innerHTML += '<div class="end" style="grid-area: 16/43;"></div>'
+    wrapper.innerHTML += '<div class="end" style="grid-area: 16/44;"></div>'
 }
 
 const level1Coins = (Y, X) => {
@@ -117,7 +134,7 @@ const checkWallcrash = () => {
 }
 
 const playerUpdate = () => {
-    var playerElements = wrapper.getElementsByClassName('player');
+    let playerElements = wrapper.getElementsByClassName('player');
     if (playerElements[0]) {
         wrapper.removeChild(playerElements[0]);
     }
@@ -143,11 +160,11 @@ const movePlayerKeydown = (e) => {
         moveY = 0;
         moveX = 1;
     }
-}
 
-const movePlayerKeyup = (e) => {
-    moveY = 0;
-    moveX = 0;
+    if (e.key == 'x') {
+        moveY = 0;
+        moveX = 0;
+    }
 }
 
 const printWallY = (begin, end, X) => {
@@ -160,6 +177,20 @@ const printWallX = (begin, end, Y) => {
     for (let i = begin; i < end; i++){
         wrapper.innerHTML += `<div class="wall" style="grid-area: ${Y}/${i};"></div>`;
     }
+}
+
+const checkPlayerWin = () => {
+    let endArea = document.querySelectorAll('.end');
+    let playerDom = document.querySelector('.player');
+    endArea.forEach((area) => {
+        let endRect = area.getBoundingClientRect();
+        let playerRect = playerDom.getBoundingClientRect();
+        if(endRect.x == playerRect.x && endRect.y == playerRect.y) {
+            if (coinsScore == 8) {
+                alert("you win!!");
+            }
+        }
+    });
 }
 
 level1();
@@ -179,10 +210,10 @@ const initGame = () => {
     wrapper.innerHTML += `<div class="player" style="grid-area: ${playerY}/${playerX};"></div>`;
     checkWallcrash();
     checkCoinDroped();
+    checkPlayerWin();
 }
 
 
 
 window.addEventListener('keydown', movePlayerKeydown);
-window.addEventListener('keyup', movePlayerKeyup);
 setInterval(initGame, 50);
