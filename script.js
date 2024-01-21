@@ -51,6 +51,20 @@ const level1 = () => {
     printWallX(40, 55, 5);
 }
 
+const level1Coins = (Y, X) => {
+    wrapper.innerHTML += `<div class="coins" style="grid-area: ${Y}/${X};"></div>`
+}
+
+const checkCoinDroped = () => {
+    let coins = document.querySelectorAll('.coins');
+    coins.forEach((coin) => {
+        let playerDom = document.querySelector('.player');
+        let coinRect = coin.getBoundingClientRect();
+        let playerRect = playerDom.getBoundingClientRect();
+        //funcion sin terminar, falta hacer que el player haga drop de las monedas
+    });
+}
+
 const checkWallOut = () => {
     if (playerX < 1) {
         playerX = 1;
@@ -143,7 +157,14 @@ const printWallX = (begin, end, Y) => {
 }
 
 level1();
-
+level1Coins(2, 8);
+level1Coins(8, 38);
+level1Coins(22, 28);
+level1Coins(37, 38);
+level1Coins(18, 2);
+level1Coins(57, 2);
+level1Coins(53, 23);
+level1Coins(38, 58);
 const initGame = () => {
     playerUpdate();
     playerX += moveX;
@@ -151,10 +172,11 @@ const initGame = () => {
     checkWallOut();
     wrapper.innerHTML += `<div class="player" style="grid-area: ${playerY}/${playerX};"></div>`;
     checkWallcrash();
+    checkCoinDroped();
 }
 
 
 
 window.addEventListener('keydown', movePlayerKeydown);
-// window.addEventListener('keyup', movePlayerKeyup);
+window.addEventListener('keyup', movePlayerKeyup);
 setInterval(initGame, 100);
