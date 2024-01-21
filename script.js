@@ -4,6 +4,7 @@ let moveX = 0;
 let moveY = 0;
 let playerX = 3;
 let playerY = 3;
+let coinsScore = 0;
 
 const level1 = () => {
     printWallY(1, 12, 5);
@@ -61,7 +62,12 @@ const checkCoinDroped = () => {
         let playerDom = document.querySelector('.player');
         let coinRect = coin.getBoundingClientRect();
         let playerRect = playerDom.getBoundingClientRect();
-        //funcion sin terminar, falta hacer que el player haga drop de las monedas
+        if (coinRect.x == playerRect.x && coinRect.y == playerRect.y) {
+            coin.className = 'none';
+            console.log("coin obtained");
+            coinsScore ++;
+            console.log(coinsScore);
+        }
     });
 }
 
@@ -179,4 +185,4 @@ const initGame = () => {
 
 window.addEventListener('keydown', movePlayerKeydown);
 window.addEventListener('keyup', movePlayerKeyup);
-setInterval(initGame, 100);
+setInterval(initGame, 50);
